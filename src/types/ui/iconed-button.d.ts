@@ -1,0 +1,3 @@
+type TIconedButton = {
+   icon: FC;
+}

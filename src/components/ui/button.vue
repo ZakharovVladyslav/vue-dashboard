@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { TButtonProps } from '@/types';
 
-const { onClick } = defineProps<TButtonProps>();
+const emit = defineEmits(['click']);
 
-const cButton = ref('button');
+const handleClick = () => {
+   emit('click');
+};
 </script>
 
 <template>
-   <button :class="[$style.button]" @click="onClick">
+   <button :class="[$style.button]" @click="handleClick">
       <slot />
    </button>
 </template>
@@ -21,5 +22,7 @@ const cButton = ref('button');
    border: none;
 
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+   cursor: pointer;
 }
 </style>

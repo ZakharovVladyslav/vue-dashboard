@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { v7 } from 'uuid';
 
-import { Button } from '@/components';
+import Button from '@/components/ui/button.vue';
+import Header from '@/components/interface/header.vue';
 
 const todoTitle = ref('');
 const todos = ref<TTodo[]>([
@@ -48,13 +49,11 @@ const appendTodo = () => {
 const handleRemoveTodo = (id: UUID) => {
    todos.value = todos.value.filter(todo => todo.id !== id);
 };
-
-// classes
-
-const btnAdd = ref('btnAdd');
 </script>
 
 <template>
+   <Header />
+
    <input type="text" v-model="todoTitle" />
 
    <ul>
@@ -65,14 +64,21 @@ const btnAdd = ref('btnAdd');
             :style="{ textDecoration: todo.completed ? 'line-through' : 'none' }"
             >{{ todo.title }}
 
-            <Button :onClick="() => handleRemoveTodo(todo.id)">X</Button>
+            <Button @click="() => handleRemoveTodo(todo.id)">X</Button>
          </span>
       </li>
    </ul>
 
-   <Button :onClick="appendTodo">+</Button>
+   <Button @click="appendTodo">+</Button>
 </template>
 
 <style lang="scss">
-@import './home.scss';
+.buttonWrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 20px;
+
+   opacity: 0;
+}
 </style>

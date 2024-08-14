@@ -1,3 +1,2 @@
-import Button from './button.vue';
-
-export { Button };
+export * from './interface';
+export * from './ui';
